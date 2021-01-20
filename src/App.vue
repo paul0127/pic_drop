@@ -99,7 +99,7 @@ export default {
         resizable: true,
         draggable: true,
         acceptRatio: false,
-        active: false
+        active: true
       },
       {
         zoom: 1,
