@@ -5,5 +5,5 @@ module.exports = {
             return options
         })
     },
-    baseUrl : '/ddr'
+    baseUrl : '/'
 }
