@@ -51,6 +51,7 @@ export default {
           height: 100,
           rotation: 88,
           active: false,
+          zIndex:1
         }
       },
       type: Object,
@@ -148,6 +149,7 @@ export default {
         width: transform.width / this.zoom + 'px',
         height: transform.height / this.zoom + 'px',
         transform: `rotate(${transform.rotation}deg)`,
+        zIndex:transform.zIndex
       }
     },
   },

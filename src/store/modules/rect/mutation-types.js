@@ -56,5 +56,5 @@ export default {
     CHANGE_HEIGHT,
     CHANGE_TOP,
     CHANGE_LEFT,
-    CHANGE_ANGLE
+    CHANGE_ANGLE,
 }

@@ -72,6 +72,9 @@ export default {
     setLeft({commit}, {id, x}) {
         commit(types.CHANGE_LEFT, {id, x});
     },
+    setZindex({commit}, {id, z}) {
+        commit(types.CHANGE_ZINDEX, {id, z});
+    },
 
     changeXLock({commit, state}, {id}) {
         switch (state.rects[id].axis) {

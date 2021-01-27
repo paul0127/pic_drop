@@ -18,20 +18,11 @@
           :isActive="rect.active"
           :value="transform[index]"
           :zoom="rect.zoom"
-          v-on:activated="activateEv(index)"
-          v-on:deactivated="deactivateEv(index)"
-          v-on:dragging="changePosition($event, index)"
-          v-on:resizing="changeSize($event, index)"
-          v-on:rotating="changeRotate($event, index)"
-          @drag-start="handleDragStart"
-          @drag="handleDrag"
-          @drag-end="handleDragEnd"
-          @resize-start="handleResizeStart"
-          @resize="handleResize"
-          @resize-end="handleResizeEnd"
-          @rotate-start="handleRotateStart"
-          @rotate="handleRotate"
-          @rotate-end="handleRotateEnd"
+          @activated="activateEv(index)"
+          @deactivated="deactivateEv(index)"
+          @dragging="changePosition($event, index)"
+          @resizing="changeSize($event, index)"
+          @rotating="changeRotate($event, index)"
         >
           <div class="cell"></div>
         </DDR>
@@ -43,12 +34,9 @@
         <input
           class="input-value"
           :type="item.type"
-          v-model="controlled[item.name]"
+          :value="controlled[item.name]"
+          @change="controlledChang(item.name,$event)"
         />
-      </div>
-      <div class="input-item">
-        <label class="input-label">events</label>
-        <span class="input-value">{{ events }}</span>
       </div>
     </div>
   </div>
@@ -69,30 +57,8 @@ export default {
         { type: 'number', name: 'width' },
         { type: 'number', name: 'height' },
         { type: 'number', name: 'rotation' },
-        { type: 'number', name: 'zoom' },
-        { type: 'number', name: 'minWidth' },
-        { type: 'number', name: 'minHeight' },
-        { type: 'checkbox', name: 'acceptRatio' },
-        { type: 'checkbox', name: 'draggable' },
-        { type: 'checkbox', name: 'resizable' },
-        { type: 'checkbox', name: 'rotatable' },
-        { type: 'checkbox', name: 'active' },
-      ],
-      controlled: {
-        zoom: 1,
-        x: 500,
-        y: 100,
-        width: 100,
-        height: 100,
-        rotation: 0,
-        minHeight: 10,
-        minWidth: 10,
-        rotatable: true,
-        resizable: true,
-        draggable: true,
-        acceptRatio: false,
-        active: true,
-      },
+        { type: 'number', name: 'zIndex' },
+      ]
     }
   },
 
@@ -106,7 +72,7 @@ export default {
     transform() {
       let array = []
       this.rects.forEach((item) => {
-        let { x, y, height, width, rotation, active } = item
+        let { x, y, height, width, rotation, active, zIndex} = item
         array.push({
           x: +x,
           y: +y,
@@ -114,12 +80,44 @@ export default {
           height: +height,
           rotation: +rotation,
           active: active,
+          zIndex: zIndex
         })
       })
       return array
     },
+    controlled(){
+        let c = this.$store.state.rect.rects
+        let x = c.find(item=>item.active==true) || {zoom: 1,x: 0,y: 0,width: 0,height: 0,rotation: 0,minHeight: 0,minWidth: 0,rotatable: true,resizable: true,draggable: true,acceptRatio: false,active: false,zIndex:1}
+        
+        return JSON.parse(JSON.stringify(x))
+    }
   },
   methods: {
+    controlledChang(name,e){
+        let c = this.$store.state.rect.rects
+        let x = c.findIndex(item=>item.active==true)
+
+        switch(name){
+          case 'x':
+            this.$store.dispatch('rect/setLeft', { id: x, x: e.target.value })
+            break
+          case 'y':
+            this.$store.dispatch('rect/setTop', { id: x, y: e.target.value })
+            break
+          case 'width':
+            this.$store.dispatch('rect/setWidth', { id: x, width: e.target.value })
+            break
+          case 'height':
+            this.$store.dispatch('rect/setHeight', {id: x,height: e.target.value,})
+            break
+          case 'rotation':
+            this.$store.dispatch('rect/setRotate', {id: x,rotation: e.target.value,})
+            break
+          case 'zIndex':
+            this.$store.dispatch('rect/setZindex', {id: x,z: e.target.value,})
+            break
+        }
+    },
     activateEv(index) {
       this.$store.dispatch('rect/setActive', { id: index })
     },
@@ -128,7 +126,6 @@ export default {
       this.$store.dispatch('rect/unsetActive', { id: index })
     },
     changePosition(newRect, index) {
-      console.log(newRect,index)
       this.$store.dispatch('rect/setTop', { id: index, y: newRect.y })
       this.$store.dispatch('rect/setLeft', { id: index, x: newRect.x })
       this.$store.dispatch('rect/setWidth', { id: index, width: newRect.width })
@@ -150,45 +147,6 @@ export default {
     changeRotate(newRect, index) {
       console.log(newRect,index)
       this.$store.dispatch('rect/setRotate', { id: index, rotation: newRect.rotation })
-    },
-    handler(event, transform) {
-      this.controlled = Object.assign({}, this.controlled, transform)
-    },
-    handleDragStart(e, t) {
-      this.events = 'drag-start'
-      this.handler(e, t)
-    },
-    handleDrag(e, t) {
-      this.events = 'drag'
-      this.handler(e, t)
-    },
-    handleDragEnd(e, t) {
-      this.events = 'drag-end'
-      this.handler(e, t)
-    },
-    handleResizeStart(e, t) {
-      this.events = 'resize-start'
-      this.handler(e, t)
-    },
-    handleResize(e, t) {
-      this.events = 'resize'
-      this.handler(e, t)
-    },
-    handleResizeEnd(e, t) {
-      this.events = 'resize-end'
-      this.handler(e, t)
-    },
-    handleRotateStart(e, t) {
-      this.events = 'rotate-start'
-      this.handler(e, t)
-    },
-    handleRotate(e, t) {
-      this.events = 'rotate'
-      this.handler(e, t)
-    },
-    handleRotateEnd(e, t) {
-      this.events = 'rotate-end'
-      this.handler(e, t)
     },
   },
 }
@@ -234,7 +192,7 @@ export default {
 
 .cell {
   position: absolute;
-  background: rgba(156, 39, 176, 0.34);
+  background:rgb(156 39 176);
   width: 100%;
   height: 100%;
 }

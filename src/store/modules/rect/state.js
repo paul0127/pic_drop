@@ -14,6 +14,7 @@ export default {
       draggable: true,
       acceptRatio: false,
       active: false,
+      zIndex:1,
     },
     {
       zoom: 1,
@@ -29,6 +30,7 @@ export default {
       draggable: true,
       acceptRatio: false,
       active: false,
+      zIndex:1,
     }
   ],
   backgrounds: [

@@ -82,7 +82,7 @@ export default {
     },
 
     [CHANGE_ZINDEX](state, payload) {
-        state.rects[payload.id].zIndex = payload.zIndex;
+        state.rects[payload.id].zIndex = payload.z;
     },
 
     [CHANGE_HEIGHT](state, payload) {
