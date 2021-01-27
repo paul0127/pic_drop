@@ -88,57 +88,13 @@ export default {
         acceptRatio: false,
         active: true,
       },
-      rects: [
-        {
-          zoom: 1,
-          x: 800,
-          y: 100,
-          width: 200,
-          height: 100,
-          rotation: 0,
-          minHeight: 10,
-          minWidth: 10,
-          rotatable: true,
-          resizable: true,
-          draggable: true,
-          acceptRatio: false,
-          active: true,
-        },
-        {
-          zoom: 1,
-          x: 0,
-          y: 0,
-          width: 200,
-          height: 100,
-          rotation: 0,
-          minHeight: 10,
-          minWidth: 10,
-          rotatable: true,
-          resizable: true,
-          draggable: true,
-          acceptRatio: false,
-          active: true,
-        },
-        {
-          zoom: 1,
-          x: 0,
-          y: 0,
-          width: 300,
-          height: 100,
-          rotation: 0,
-          minHeight: 10,
-          minWidth: 10,
-          rotatable: true,
-          resizable: true,
-          draggable: true,
-          acceptRatio: false,
-          active: true,
-        },
-      ],
     }
   },
 
   computed: {
+    rects(){
+        return this.$store.state.rect.rects
+    },
     currentScale() {
       return `scale(${this.controlled.zoom})`
     },
