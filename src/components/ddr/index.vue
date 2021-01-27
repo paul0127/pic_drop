@@ -63,7 +63,7 @@ export default {
       type: Number,
       default: 1,
     },
-    isactive: {
+    isActive: {
       default: false,
       type: Boolean,
     },
@@ -105,19 +105,29 @@ export default {
   data() {
     return {
       transform: Object.assign({}, this.value),
-      active:this.isactive
+      active: this.isActive,
     }
   },
   watch: {
     value(t) {
       this.transform = t
     },
+    active(isActive) {
+      if (isActive) {
+        this.$emit('activated')
+      } else {
+        this.$emit('deactivated')
+      }
+    },
+
+    isActive(val) {
+      this.active = val
+    },
   },
   mounted() {
     //document.documentElement.addEventListener('mousedown', this.deselect)
-    
   },
-  beforeDestroy: function () {
+  beforeDestroy: function() {
     //document.documentElement.removeEventListener('mousedown', this.deselect);
   },
   computed: {
@@ -140,13 +150,9 @@ export default {
         transform: `rotate(${transform.rotation}deg)`,
       }
     },
-    isActive(val) {
-      this.active = val;
-    },
   },
   methods: {
     deselect() {
-      console.log(this.active)
       if (this.preventActiveBehavior) {
         return
       }
@@ -196,8 +202,7 @@ export default {
 
     handleMouseDown(event) {
       if (!this.preventActiveBehavior) {
-        console.log(this.active)
-        this.active = true;
+        this.active = true
       }
       let point = event.touches ? event.touches[0] : event
       let { clientX, clientY } = point
@@ -211,21 +216,17 @@ export default {
       if (event.target.dataset.type === 'rotate') {
         this._handlerType = 'rotate'
         this.handleRotateStart(event)
-        this.$emit('rotate-start', event, this.transform)
       } else if (this._activeTarget.dataset.resizetype) {
         this._handlerType = 'resize'
         this._parentRect = this.$refs.wrapper.parentNode.getBoundingClientRect()
         this.handleResizeStart(event)
-        this.$emit('resize-start', event, this.transform)
       } else {
         this._handlerType = 'drag'
-        this.draggable && this.$emit('drag-start', event, this.transform)
       }
     },
     handleMouseMove(event) {
       if (this._handlerType === 'resize') {
         this.handleResizeMove(event)
-        this.$emit('resize', event, this.transform)
       } else if (this._handlerType === 'drag' && this.draggable) {
         let { clientX, clientY } = event.touches ? event.touches[0] : event
         let deltaX = clientX - this._lastX
@@ -234,11 +235,11 @@ export default {
         this._lastY = clientY
         this.transform.x = Math.round(this.transform.x + deltaX)
         this.transform.y = Math.round(this.transform.y + deltaY)
-        this.$emit('drag', event, this.transform)
       } else if (this._handlerType === 'rotate') {
         this.handleRotateMove(event)
-        this.$emit('rotate', event, this.transform)
       }
+      
+      this.$emit('dragging', this.transform);
     },
     handleMouseUp(event) {
       document.removeEventListener('mousemove', this.handleMouseMove, false)
@@ -250,8 +251,6 @@ export default {
         resize: 'resizable',
         rotate: 'rotatable',
       }
-      this[ev[this._handlerType]] &&
-        this.$emit(this._handlerType + '-end', event, this.transform)
     },
     handleResizeStart(event) {
       let type = event.target.dataset.resizetype
@@ -326,15 +325,15 @@ export default {
       transform.height = Math.round(transform.height)
       currentRatio = transform.width / transform.height
       let matrix = getPoints(transform)
-      console.log(matrix)
       let _opp = matrix[pointMap[type]]
-      console.log(_opp)
       let deltaX = -(_opp.x - opposite.x),
         deltaY = -(_opp.y - opposite.y)
       transform.x = Math.round(transform.x + deltaX)
       transform.y = Math.round(transform.y + deltaY)
       this._resizeOpt.currentRatio = currentRatio
       this.transform = transform
+
+      this.$emit('resizing', this.transform);
     },
     handleRotateStart(event) {
       let { clientX, clientY } = event.touches ? event.touches[0] : event
@@ -356,6 +355,8 @@ export default {
       r = r % 360
       r = r < 0 ? r + 360 : r
       this.transform.rotation = Math.floor(r)
+
+      this.$emit('rotating', this.transform);
     },
   },
 }

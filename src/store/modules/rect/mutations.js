@@ -93,15 +93,15 @@ export default {
         state.rects[payload.id].width = payload.width;
     },
     [CHANGE_ANGLE](state, payload) {
-        state.rects[payload.id].angle = payload.angle;
+        state.rects[payload.id].rotation = payload.rotation;
     },
 
     [CHANGE_TOP](state, payload) {
-        state.rects[payload.id].top = payload.top;
+        state.rects[payload.id].y = payload.y;
     },
 
     [CHANGE_LEFT](state, payload) {
-        state.rects[payload.id].left = payload.left;
+        state.rects[payload.id].x = payload.x;
     },
 
     [CHANGE_MINH](state, payload) {

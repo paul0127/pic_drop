@@ -61,16 +61,16 @@ export default {
     setHeight({commit}, {id, height}) {
         commit(types.CHANGE_HEIGHT, {id, height});
     },
-    setRotate({commit}, {id, angle}) {
-        commit(types.CHANGE_ANGLE, {id, angle});
+    setRotate({commit}, {id, rotation}) {
+        commit(types.CHANGE_ANGLE, {id, rotation});
     },
 
-    setTop({commit}, {id, top}) {
-        commit(types.CHANGE_TOP, {id, top});
+    setTop({commit}, {id, y}) {
+        commit(types.CHANGE_TOP, {id, y});
     },
 
-    setLeft({commit}, {id, left}) {
-        commit(types.CHANGE_LEFT, {id, left});
+    setLeft({commit}, {id, x}) {
+        commit(types.CHANGE_LEFT, {id, x});
     },
 
     changeXLock({commit, state}, {id}) {

@@ -15,9 +15,14 @@
           :resize-handler="['tl', 'tm', 'tr', 'r', 'br', 'bm', 'l', 'bl']"
           :min-width="+rect.minWidth"
           :min-height="+rect.minHeight"
-          :isactive="rect.active"
+          :isActive="rect.active"
           :value="transform[index]"
           :zoom="rect.zoom"
+          v-on:activated="activateEv(index)"
+          v-on:deactivated="deactivateEv(index)"
+          v-on:dragging="changePosition($event, index)"
+          v-on:resizing="changeSize($event, index)"
+          v-on:rotating="changeRotate($event, index)"
           @drag-start="handleDragStart"
           @drag="handleDrag"
           @drag-end="handleDragEnd"
@@ -96,7 +101,7 @@ export default {
         return this.$store.state.rect.rects
     },
     currentScale() {
-      return `scale(${this.controlled.zoom})`
+      return `scale(1)`
     },
     transform() {
       let array = []
@@ -115,6 +120,37 @@ export default {
     },
   },
   methods: {
+    activateEv(index) {
+      this.$store.dispatch('rect/setActive', { id: index })
+    },
+
+    deactivateEv(index) {
+      this.$store.dispatch('rect/unsetActive', { id: index })
+    },
+    changePosition(newRect, index) {
+      console.log(newRect,index)
+      this.$store.dispatch('rect/setTop', { id: index, y: newRect.y })
+      this.$store.dispatch('rect/setLeft', { id: index, x: newRect.x })
+      this.$store.dispatch('rect/setWidth', { id: index, width: newRect.width })
+      this.$store.dispatch('rect/setHeight', {
+        id: index,
+        height: newRect.height,
+      })
+    },
+
+    changeSize(newRect, index) {
+      this.$store.dispatch('rect/setTop', { id: index, top: newRect.x })
+      this.$store.dispatch('rect/setLeft', { id: index, left: newRect.y })
+      this.$store.dispatch('rect/setWidth', { id: index, width: newRect.width })
+      this.$store.dispatch('rect/setHeight', {
+        id: index,
+        height: newRect.height,
+      })
+    },
+    changeRotate(newRect, index) {
+      console.log(newRect,index)
+      this.$store.dispatch('rect/setRotate', { id: index, rotation: newRect.rotation })
+    },
     handler(event, transform) {
       this.controlled = Object.assign({}, this.controlled, transform)
     },

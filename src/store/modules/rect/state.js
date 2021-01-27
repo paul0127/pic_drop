@@ -17,8 +17,8 @@ export default {
     },
     {
       zoom: 1,
-      x: 800,
-      y: 100,
+      x: 500,
+      y: 300,
       width: 200,
       height: 100,
       rotation: 0,
