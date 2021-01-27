@@ -15,7 +15,7 @@
           :resize-handler="['tl', 'tm', 'tr', 'r', 'br', 'bm', 'l', 'bl']"
           :min-width="+rect.minWidth"
           :min-height="+rect.minHeight"
-          :active="rect.active"
+          :isactive="rect.active"
           :value="transform[index]"
           :zoom="rect.zoom"
           @drag-start="handleDragStart"

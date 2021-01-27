@@ -13,7 +13,7 @@ export default {
       resizable: true,
       draggable: true,
       acceptRatio: false,
-      active: true,
+      active: false,
     },
     {
       zoom: 1,
@@ -28,22 +28,7 @@ export default {
       resizable: true,
       draggable: true,
       acceptRatio: false,
-      active: true,
-    },
-    {
-      zoom: 1,
-      x: 800,
-      y: 100,
-      width: 200,
-      height: 100,
-      rotation: 0,
-      minHeight: 10,
-      minWidth: 10,
-      rotatable: true,
-      resizable: true,
-      draggable: true,
-      acceptRatio: false,
-      active: true,
+      active: false,
     }
   ],
   backgrounds: [
