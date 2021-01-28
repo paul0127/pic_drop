@@ -243,16 +243,12 @@ export default {
       
       this.$emit('dragging', this.transform);
     },
-    handleMouseUp(event) {
+    handleMouseUp() {
       document.removeEventListener('mousemove', this.handleMouseMove, false)
       document.removeEventListener('mouseup', this.handleMouseUp, false)
       document.removeEventListener('touchmove', this.handleMouseMove, false)
       document.removeEventListener('touchend', this.handleMouseUp, false)
-      let ev = {
-        drag: 'draggable',
-        resize: 'resizable',
-        rotate: 'rotatable',
-      }
+      
     },
     handleResizeStart(event) {
       let type = event.target.dataset.resizetype

@@ -1,10 +1,7 @@
 <template>
   <div id="app">
     <div class="columns">
-      <h1 class="header">
-        yoyoo - ddr Mobile & PC
-      </h1>
-      <div :style="{ transform: currentScale }" class="content">
+      <div  class="content" :style="{ backgroundImage: 'url(' + background.url + ')' }">
         <DDR
           v-for="(rect, index) in rects"
           :key="index"
@@ -24,7 +21,7 @@
           @resizing="changeSize($event, index)"
           @rotating="changeRotate($event, index)"
         >
-          <div class="cell"></div>
+          <div class="cell" :style="{ backgroundImage: 'url(' + rect.imgUrl + ')' }"></div>
         </DDR>
       </div>
     </div>
@@ -65,6 +62,9 @@ export default {
   computed: {
     rects(){
         return this.$store.state.rect.rects
+    },
+    background(){
+        return this.$store.state.rect.background
     },
     currentScale() {
       return `scale(1)`
@@ -188,11 +188,15 @@ export default {
   flex: 1;
   position: relative;
   overflow: hidden;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .cell {
   position: absolute;
-  background:rgb(156 39 176);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   width: 100%;
   height: 100%;
 }
