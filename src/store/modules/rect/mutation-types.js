@@ -32,6 +32,8 @@ export const CHANGE_TOP = 'CHANGE_TOP';
 export const CHANGE_LEFT = 'CHANGE_LEFT';
 export const CHANGE_ANGLE = 'CHANGE_ANGLE';
 
+export const SET_BACKGROUNDS = 'SET_BACKGROUNDS';
+
 export default {
     ENABLE_ACTIVE,
     DISABLE_ACTIVE,
@@ -57,4 +59,5 @@ export default {
     CHANGE_TOP,
     CHANGE_LEFT,
     CHANGE_ANGLE,
+    SET_BACKGROUNDS,
 }

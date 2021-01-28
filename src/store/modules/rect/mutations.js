@@ -22,7 +22,8 @@ import {
     CHANGE_MINW,
     CHANGE_TOP,
     CHANGE_WIDTH,
-    CHANGE_ANGLE
+    CHANGE_ANGLE,
+    SET_BACKGROUNDS
 } from './mutation-types';
 
 export default {
@@ -111,5 +112,9 @@ export default {
 
     [CHANGE_MINW](state, payload) {
         state.rects[payload.id].minw = payload.minw;
+    },
+    [SET_BACKGROUNDS](state, payload) {
+        state.background.name = payload.object.name;
+        state.background.url = payload.object.url;
     }
 };

@@ -13,7 +13,10 @@ export default {
   },
   methods:{
     backgroundSet(val){
+        let object = this.backgrounds[val]
         
+        this.$store.dispatch('material/setActive', { id: val })
+        this.$store.dispatch('rect/setBackground', { object: object })
     }
   }
 }

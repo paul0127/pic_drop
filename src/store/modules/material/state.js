@@ -8,12 +8,12 @@ export default {
       {
         active:false,
         name: 'test1',
-        url: './background/background01.png',
+        url: './background/background02.png',
       },
       {
         active:false,
         name: 'test1',
-        url: './background/background01.png',
+        url: './background/background03.png',
       },
     ],
   }

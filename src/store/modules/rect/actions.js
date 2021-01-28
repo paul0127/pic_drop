@@ -150,5 +150,9 @@ export default {
 
     setMinHeight({commit}, {id, height}) {
         commit(types.CHANGE_MINH, {id, minh:height});
+    },
+
+    setBackground({commit}, {object}) {
+        commit(types.SET_BACKGROUNDS, {object:object});
     }
 };

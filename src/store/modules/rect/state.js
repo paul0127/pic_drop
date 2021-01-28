@@ -69,19 +69,5 @@ export default {
       imgUrl:'./img/pic04.png',
     }
   ],
-  backgrounds: [
-    {
-      name: 'test1',
-      url: './background/background01.png',
-    },
-    {
-      name: 'test1',
-      url: './background/background01.png',
-    },
-    {
-      name: 'test1',
-      url: './background/background01.png',
-    },
-  ],
-  background: { name: 'test1', url: './background/background01.png' },
+  background: { name: '', url: '' },
 }
