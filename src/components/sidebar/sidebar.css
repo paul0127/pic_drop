@@ -6,3 +6,8 @@
 .sidebar .background_img .list .item.active{border: 1px solid #000;}
 .sidebar .background_img .list .item img{width:100%;}
 .sidebar .background_img .list .item .name{text-align: center;}
+
+.sidebar .rects{width: 100%;}
+.sidebar .rects .title{font-size: 24px;font-weight: bold;line-height: 2;}
+.sidebar .rects .list{display: flex;flex-wrap: wrap;}
+.sidebar .rects .list .item{flex: 0 0 50%;cursor: pointer;}

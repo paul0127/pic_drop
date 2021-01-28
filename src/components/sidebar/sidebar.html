@@ -8,4 +8,12 @@
         </div>
       </div>
     </div>
+    <div class="rects">
+      <div class="title">選擇素材</div>
+      <div class="list">
+        <div class="item" v-for="(rect,index) in rects" :key="index" @dblclick="add_rect(index)">
+          <img :src="rect.imgUrl" >
+        </div>
+      </div>
+    </div>
   </div>

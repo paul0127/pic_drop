@@ -23,7 +23,8 @@ import {
     CHANGE_TOP,
     CHANGE_WIDTH,
     CHANGE_ANGLE,
-    SET_BACKGROUNDS
+    SET_BACKGROUNDS,
+    ADD_RECT,
 } from './mutation-types';
 
 export default {
@@ -116,5 +117,8 @@ export default {
     [SET_BACKGROUNDS](state, payload) {
         state.background.name = payload.object.name;
         state.background.url = payload.object.url;
+    },
+    [ADD_RECT](state, payload) {
+        state.rects.push(payload.object);
     }
 };

@@ -154,5 +154,9 @@ export default {
 
     setBackground({commit}, {object}) {
         commit(types.SET_BACKGROUNDS, {object:object});
-    }
+    },
+    addRect({commit}, {object}) {
+        commit(types.ADD_RECT, {object:object});
+    },
+
 };

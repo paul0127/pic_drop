@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <sidebar :backgrounds="backgrounds"></sidebar>
+    <sidebar :backgrounds="material_backgrounds" :rects="material_rects"></sidebar>
     <div class="columns">
       <div  class="content" :style="{ backgroundImage: 'url(' + background.url + ')' }">
         <DDR
@@ -68,8 +68,11 @@ export default {
     background(){
         return this.$store.state.rect.background
     },
-    backgrounds(){
+    material_backgrounds(){
       return this.$store.state.material.backgrounds
+    },
+    material_rects(){
+      return this.$store.state.material.rects
     },
     currentScale() {
       return `scale(1)`

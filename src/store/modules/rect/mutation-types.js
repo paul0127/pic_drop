@@ -33,6 +33,7 @@ export const CHANGE_LEFT = 'CHANGE_LEFT';
 export const CHANGE_ANGLE = 'CHANGE_ANGLE';
 
 export const SET_BACKGROUNDS = 'SET_BACKGROUNDS';
+export const ADD_RECT = 'ADD_RECT';
 
 export default {
     ENABLE_ACTIVE,
@@ -60,4 +61,5 @@ export default {
     CHANGE_LEFT,
     CHANGE_ANGLE,
     SET_BACKGROUNDS,
+    ADD_RECT,
 }
