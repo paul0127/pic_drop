@@ -1,0 +1,27 @@
+    <div
+      ref="wrapper"
+      :style="style"
+      :class="{ active: active }"
+      @touchstart="handleMouseDown"
+      @mousedown="handleMouseDown"
+      class="yoyoo-ddr"
+    >
+      <slot></slot>
+      <div v-if="resizable">
+        <span
+          :data-resizetype="item"
+          :key="item"
+          :class="item"
+          :style="{ ...getNewHandler(item) }"
+          class="resize-handler"
+          v-for="item in resizeHandler"
+        ></span>
+      </div>
+      <span
+        :style="rotateHandler"
+        v-if="rotatable"
+        data-type="rotate"
+        class="rotate-handler"
+      ></span>
+    </div>
+  

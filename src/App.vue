@@ -9,7 +9,7 @@
           :rotatable="rect.rotatable"
           :resizable="rect.resizable"
           :accept-ratio="rect.acceptRatio"
-          :resize-handler="['tl', 'tm', 'tr', 'r', 'br', 'bm', 'l', 'bl']"
+          :resize-handler="['br']"
           :min-width="+rect.minWidth"
           :min-height="+rect.minHeight"
           :isActive="rect.active"
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import DDR from './components/ddr'
+import DDR from './components/ddr/ddr.vue'
 
 export default {
   name: 'app',
