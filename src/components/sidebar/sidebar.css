@@ -1,0 +1,8 @@
+.sidebar{flex: 0 0 300px;padding-right: 10px;border-right: 2px solid #ccc;}
+.sidebar .background_img{width: 100%;}
+.sidebar .background_img .title{font-size: 24px;font-weight: bold;line-height: 2;}
+.sidebar .background_img .list{display: flex;flex-wrap: wrap;}
+.sidebar .background_img .list .item{flex: 0 0 50%;cursor: pointer;}
+.sidebar .background_img .list .item.active{border: 1px solid #000;}
+.sidebar .background_img .list .item img{width:100%;}
+.sidebar .background_img .list .item .name{text-align: center;}

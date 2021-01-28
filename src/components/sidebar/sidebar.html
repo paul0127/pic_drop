@@ -1,0 +1,11 @@
+<div class="sidebar">
+    <div class="background_img">
+      <div class="title">選擇便當盒</div>
+      <div class="list">
+        <div class="item" :class="{'active':background.active}" v-for="(background,index) in backgrounds" :key="index" @click="backgroundSet(index)">
+            <img :src="background.url">
+            <div class="name">{{background.name}}</div>
+        </div>
+      </div>
+    </div>
+  </div>

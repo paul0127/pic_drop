@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <sidebar :backgrounds="backgrounds"></sidebar>
     <div class="columns">
       <div  class="content" :style="{ backgroundImage: 'url(' + background.url + ')' }">
         <DDR
@@ -41,10 +42,11 @@
 
 <script>
 import DDR from './components/ddr/ddr.vue'
+import sidebar from './components/sidebar/sidebar.vue'
 
 export default {
   name: 'app',
-  components: { DDR },
+  components: { DDR ,sidebar},
   data() {
     return {
       events: '',
@@ -65,6 +67,9 @@ export default {
     },
     background(){
         return this.$store.state.rect.background
+    },
+    backgrounds(){
+      return this.$store.state.material.backgrounds
     },
     currentScale() {
       return `scale(1)`
