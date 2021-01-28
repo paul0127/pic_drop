@@ -56,4 +56,5 @@
 .rotate-handler {
   left: 50%;
   cursor: crosshair;
+  top: -18px !important;
 }
