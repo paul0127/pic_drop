@@ -299,8 +299,15 @@ import {
         transform.x = Math.round(transform.x + deltaX)
         transform.y = Math.round(transform.y + deltaY)
         this._resizeOpt.currentRatio = currentRatio
+        
+        console.log(this.transform)
+        if((transform.width/this.transform.width)>=(transform.height/this.transform.height)){
+          transform.height = this.transform.height * (transform.width/this.transform.width)
+        }else{
+          transform.width = this.transform.width * (transform.height/this.transform.height)
+        }
         this.transform = transform
-  
+
         this.$emit('resizing', this.transform);
       },
       handleRotateStart(event) {
